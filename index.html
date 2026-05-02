@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi đằng ấy</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: #ffebee; font-family: Arial, sans-serif;
+            overflow: hidden; display: flex; justify-content: center; align-items: center;
+        }
+
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #ffebee; z-index: 1000; display: flex;
+            justify-content: center; align-items: center;
+        }
+
+        #start-btn {
+            padding: 15px 30px; font-size: 18px; background: #ff1744;
+            color: white; border: none; border-radius: 25px; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Hiệu ứng ảnh bay */
+        .floating-img {
+            width: 120px; height: auto; border: 4px solid white;
+            position: absolute; z-index: 1; animation: float-around 20s infinite linear;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        @keyframes float-around {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, 50px) rotate(5deg); }
+            50% { transform: translate(0, 100px) rotate(-5deg); }
+            75% { transform: translate(-50px, 50px) rotate(5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        /* Hiệu ứng trái tim bay */
+        .heart-particle {
+            position: absolute; color: #ff1744; pointer-events: none; z-index: 2;
+        }
+
+        /* Phong thư */
+        .envelope-container { position: relative; width: 280px; height: 180px; z-index: 10; }
+        .envelope {
+            width: 100%; height: 100%; background: #ffffff; border: 1px solid #ddd;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); cursor: pointer; position: relative;
+        }
+        .envelope::after {
+            content: ""; position: absolute; top: 0;
+            border-left: 140px solid transparent; border-right: 140px solid transparent;
+            border-top: 90px solid #f0f0f0; transform-origin: top; transition: 0.5s; z-index: 2;
+        }
+
+        /* Bức thư */
+        .letter {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            width: 90%; max-width: 450px; background: white; padding: 20px;
+            display: flex; align-items: center; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border-radius: 10px; z-index: 100; opacity: 0; transition: 0.6s;
+            box-sizing: border-box;
+        }
+
+        .letter-img {
+            width: 35%; height: auto; aspect-ratio: 853 / 1215;
+            object-fit: cover; border-radius: 5px; margin-right: 15px;
+        }
+
+        .letter-content { flex: 1; }
+        .letter-content h2 { font-size: 24px; font-weight: bold; margin: 0; color: #333; }
+        .letter-content p { font-size: 16px; color: #555; line-height: 1.4; margin-top: 10px; }
+
+        /* Mobile */
+        @media (max-width: 480px) {
+            .letter { flex-direction: column; text-align: center; }
+            .letter-img { width: 50%; margin-right: 0; margin-bottom: 10px; }
+            .floating-img { width: 70px; }
+        }
+
+        .envelope-container.open .letter { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        .envelope-container.open .envelope::after { transform: rotateX(180deg); }
+        .heart-icon { font-size: 50px; color: #ff1744; z-index: 3; }
+    </style>
+</head>
+<body>
+
+<div id="overlay">
+    <button id="start-btn">Qùa gửi tới người đáng ghéc cute số 1 thế giới ❤️</button>
+</div>
+
+<audio id="bgMusic" loop>
+    <source src="Dm Minh.mp3" type="audio/mpeg">
+</audio>
+
+<img src="DM Minh 1.jpg" class="floating-img" style="top: 5%; left: 5%; animation-delay: 0s;">
+<img src="DM Minh 2.jpg" class="floating-img" style="top: 10%; left: 25%; animation-delay: -2s;">
+<img src="DM Minh 3.jpg" class="floating-img" style="top: 15%; left: 45%; animation-delay: -4s;">
+<img src="DM Minh 4.jpg" class="floating-img" style="top: 5%; left: 65%; animation-delay: -6s;">
+<img src="DM Minh 5.jpg" class="floating-img" style="top: 10%; left: 85%; animation-delay: -8s;">
+<img src="DM Minh 6.jpg" class="floating-img" style="top: 30%; left: 10%; animation-delay: -1s;">
+<img src="DM Minh 7.jpg" class="floating-img" style="top: 35%; left: 35%; animation-delay: -3s;">
+<img src="DM Minh 8.jpg" class="floating-img" style="top: 30%; left: 60%; animation-delay: -5s;">
+<img src="DM Minh 9.jpg" class="floating-img" style="top: 35%; left: 80%; animation-delay: -7s;">
+<img src="DM Minh 10.jpg" class="floating-img" style="top: 55%; left: 5%; animation-delay: -9s;">
+<img src="DM Minh 11.jpg" class="floating-img" style="top: 60%; left: 20%; animation-delay: -11s;">
+<img src="DM Minh 12.jpg" class="floating-img" style="top: 55%; left: 40%; animation-delay: -13s;">
+<img src="DM Minh 13.jpg" class="floating-img" style="top: 60%; left: 70%; animation-delay: -15s;">
+<img src="DM Minh 14.jpg" class="floating-img" style="top: 55%; left: 90%; animation-delay: -17s;">
+<img src="DM Minh 15.jpg" class="floating-img" style="top: 80%; left: 15%; animation-delay: -2s;">
+<img src="DM Minh 16.jpg" class="floating-img" style="top: 85%; left: 30%; animation-delay: -4s;">
+<img src="DM Minh 17.jpg" class="floating-img" style="top: 80%; left: 55%; animation-delay: -6s;">
+<img src="DM Minh 18.jpg" class="floating-img" style="top: 85%; left: 75%; animation-delay: -8s;">
+<img src="DM Minh 19.jpg" class="floating-img" style="top: 45%; left: 25%; animation-delay: -10s;">
+<img src="DM Minh 20.jpg" class="floating-img" style="top: 45%; left: 75%; animation-delay: -12s;">
+<img src="DM Minh 21.jpg" class="floating-img" style="top: 20%; left: 15%; animation-delay: -14s;">
+<img src="DM Minh 22.jpg" class="floating-img" style="top: 70%; left: 85%; animation-delay: -16s;">
+<img src="DM Minh 23.jpg" class="floating-img" style="top: 25%; left: 50%; animation-delay: -18s;">
+<img src="DM Minh 24.jpg" class="floating-img" style="top: 75%; left: 35%; animation-delay: -20s;">
+
+<div class="envelope-container" id="mainEnvelope">
+    <div class="letter">
+        <img src="Dm Minh.jpg" class="letter-img">
+        <div class="letter-content">
+            <h2>Gửi đằng ấy</h2>
+            <p>Gửi người đáng ghéc nhưng lại cute số 1 thế giới.Không dịp nào hihi nhưng vẫn muốn tạo bất ngờ cho người đáng ghéc Nhớ cười nhiều lên nha. Nụ cười của đằng ấy làm mọi thứ xung quanh trở nên tươi hơn hẳn luôn á. Mong là lúc nào đằng ấy cũng giữ được sự vui vẻ, tươi dui và năng lượng tích cực như vậy.</p>
+        </div>
+    </div>
+    <div class="envelope">
+        <div class="heart-icon">❤️</div>
+    </div>
+</div>
+
+<script>
+    const overlay = document.getElementById('overlay');
+    const music = document.getElementById('bgMusic');
+    const envelope = document.getElementById('mainEnvelope');
+
+    document.getElementById('start-btn').addEventListener('click', () => {
+        overlay.style.display = 'none';
+        music.play();
+        createHeartFlow(); 
+    });
+
+    envelope.addEventListener('click', () => {
+        envelope.classList.add('open');
+    });
+
+    
+    function createHeartFlow() {
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'heart-particle';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '105vh';
+            heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            
+            const duration = Math.random() * 3 + 4;
+            heart.animate([
+                { transform: `translateY(0) rotate(0deg)`, opacity: 1 },
+                { transform: `translateY(-110vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+            ], { duration: duration * 1000, easing: 'linear' });
+
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), duration * 1000);
+        }, 400);
+    }
+</script>
+
+</body>
+</html>
